@@ -31,6 +31,7 @@ Automorphism
 
 Automorphism is used to rearrange the ciphertext based on the rotation step k. The result is the special permutations of the coefficients of the ciphertext polynomials. 
 For every iteration in the Automorphism, it will read element one by one, and then based on the rotation step, it computes the corresponding index of the output array, write the element to this index.
+![image](https://user-images.githubusercontent.com/74476225/204873161-d57b7ba4-4ce0-4161-a2b1-d367779f5dc1.png)
 
 NTT Parallelization
 
@@ -43,6 +44,10 @@ An n-pt NTT operation consists of log2n stages in each of which (n/2) butterfly 
 An NTT operation can be parallelized by performing multiple butterfly operations concurrently. The input of an NTT stage is the output of the previous NTT stage, 
 Thus, an NTT operation has limited parallelism for a given input, at most (n/2) butterfly operations can be performed in parallel
 
+![image](https://user-images.githubusercontent.com/74476225/204873132-139ce45c-dd30-4ac1-8c98-8ea0afbcd984.png)
+
+
+
 Butterfly Unit
 The proposed design uses the Iterative NTT scheme of which consists of log2 n stages and performs(n/2) butterfly operations at each stage. Here is an example of the memory read access pattern of coefficients for n=8
 Each yellow dot represents a butterfly operation, which consumes and produces two coefficients mapping to the same degree.
@@ -50,6 +55,32 @@ Each yellow dot represents a butterfly operation, which consumes and produces tw
 
 
 ![image](https://user-images.githubusercontent.com/74476225/204872801-c47e975f-e53b-46fe-b290-128c8ad731e6.png)
+
+
+
+
+Experimental Setup
+Programming language: C/C++
+
+Target architecture: FPGA
+
+Programming model: Xilinx Vitis HLS
+
+Explanation of Parameters
+Automorphism
+Size of the input array N
+Number of the unroll factor f
+
+NTT
+Size of the array (N)
+the prime number and the nth root unity
+Number of butterfly operations in parallel (B <= N / 2)
+
+Analysis
+
+ For the Automorphism, we expected the latency will be the size of input vector divided by the unroll factor plus some setup operations (in cycles).
+ For the NTT part, we expected the latency will be logn
+
 
 
 
