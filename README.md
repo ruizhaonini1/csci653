@@ -46,7 +46,10 @@ An NTT operation can be parallelized by performing multiple butterfly operations
 Thus, an NTT operation has limited parallelism for a given input, at most (n/2) butterfly operations can be performed in parallel
 ![image](https://user-images.githubusercontent.com/74476225/204870012-b82f210d-4a60-4d00-bff1-4573ec916d65.png)
 Butterfly Unit![image](https://user-images.githubusercontent.com/74476225/204870049-0cc8b114-dc99-46dd-bb41-a4de007c5970.png)
-![image](https://user-images.githubusercontent.com/74476225/204870105-28d7bce2-1fed-4165-91ba-99e61c1b4c08.png)
+The proposed design uses the Iterative NTT scheme of which consists of log2 n stages and performs(n/2) butterfly operations at each stage. Here is an example of the memory read access pattern of coefficients for n=8
+Each yellow dot represents a butterfly operation, which consumes and produces two coefficients mapping to the same degree.
+![image](https://user-images.githubusercontent.com/74476225/204870187-d9843e65-e342-4774-9476-57df76171786.png)
+
 
 
 
