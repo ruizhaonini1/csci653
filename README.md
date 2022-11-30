@@ -25,30 +25,32 @@ For the Automorphism algorithm I assume that using loop unroll can reduce the co
 
 For NTT part, I assume that implementing and parallelizing the butterfly unit to increases the parallelism and the performance of the operation.
 
-Key idea![image](https://user-images.githubusercontent.com/74476225/204869380-f03fa237-a9e1-4bf6-9ee0-237761691ef8.png)
-![image](https://user-images.githubusercontent.com/74476225/204869406-f9e88cff-544e-4c88-9c71-db2ea50d4187.png)
+Key idea
 
-Automorphism![image](https://user-images.githubusercontent.com/74476225/204869626-8ce3c5b2-4bb2-4aec-bfac-78394e8dc25d.png)
-![image](https://user-images.githubusercontent.com/74476225/204869660-7ef2523f-e79c-4a04-812d-43d3d53d5a33.png)
+Automorphism
+
 Automorphism is used to rearrange the ciphertext based on the rotation step k. The result is the special permutations of the coefficients of the ciphertext polynomials. 
 For every iteration in the Automorphism, it will read element one by one, and then based on the rotation step, it computes the corresponding index of the output array, write the element to this index.
-![image](https://user-images.githubusercontent.com/74476225/204869684-86199dbc-cded-4b49-b40b-9a2ed8ed521d.png)
+
 NTT Parallelization
-![image](https://user-images.githubusercontent.com/74476225/204869725-775a9496-a172-48e2-8806-0d6976018b9a.png)
-![image](https://user-images.githubusercontent.com/74476225/204869745-ad32db2c-02bc-4843-a873-f3b6bc6830fa.png)
+
 NTT computation have three parts: loading related data, performing arithmetic computations and sorting the result
 With each PE (so called butterfly units) execute arithmetic computation, and multiplication
 To achieve a higher throughput, it is possible to unroll NTT loops and parallelize the butterfly operations using multiple PEs
-![image](https://user-images.githubusercontent.com/74476225/204869766-980def35-42ca-4945-8a01-bf4cbb94fb95.png)
+
 
 An n-pt NTT operation consists of log2n stages in each of which (n/2) butterfly operations are performed.
 An NTT operation can be parallelized by performing multiple butterfly operations concurrently. The input of an NTT stage is the output of the previous NTT stage, 
 Thus, an NTT operation has limited parallelism for a given input, at most (n/2) butterfly operations can be performed in parallel
-![image](https://user-images.githubusercontent.com/74476225/204870012-b82f210d-4a60-4d00-bff1-4573ec916d65.png)
-Butterfly Unit![image](https://user-images.githubusercontent.com/74476225/204870049-0cc8b114-dc99-46dd-bb41-a4de007c5970.png)
+
+Butterfly Unit
 The proposed design uses the Iterative NTT scheme of which consists of log2 n stages and performs(n/2) butterfly operations at each stage. Here is an example of the memory read access pattern of coefficients for n=8
 Each yellow dot represents a butterfly operation, which consumes and produces two coefficients mapping to the same degree.
-![image](https://user-images.githubusercontent.com/74476225/204870187-d9843e65-e342-4774-9476-57df76171786.png)
+
+
+
+![image](https://user-images.githubusercontent.com/74476225/204872801-c47e975f-e53b-46fe-b290-128c8ad731e6.png)
+
 
 
 
