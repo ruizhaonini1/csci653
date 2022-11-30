@@ -41,6 +41,14 @@ With each PE (so called butterfly units) execute arithmetic computation, and mul
 To achieve a higher throughput, it is possible to unroll NTT loops and parallelize the butterfly operations using multiple PEs
 ![image](https://user-images.githubusercontent.com/74476225/204869766-980def35-42ca-4945-8a01-bf4cbb94fb95.png)
 
+An n-pt NTT operation consists of log2n stages in each of which (n/2) butterfly operations are performed.
+An NTT operation can be parallelized by performing multiple butterfly operations concurrently. The input of an NTT stage is the output of the previous NTT stage, 
+Thus, an NTT operation has limited parallelism for a given input, at most (n/2) butterfly operations can be performed in parallel
+![image](https://user-images.githubusercontent.com/74476225/204870012-b82f210d-4a60-4d00-bff1-4573ec916d65.png)
+Butterfly Unit![image](https://user-images.githubusercontent.com/74476225/204870049-0cc8b114-dc99-46dd-bb41-a4de007c5970.png)
+![image](https://user-images.githubusercontent.com/74476225/204870105-28d7bce2-1fed-4165-91ba-99e61c1b4c08.png)
+
+
 
 
 
