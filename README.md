@@ -6,26 +6,26 @@
 - But the high computation complexity and latency of the HE schemes still form the bottleneck for applications. 
 ![image](https://user-images.githubusercontent.com/74476225/204867746-71dc8f87-6ddf-4989-879a-9965b67d13e5.png)
 
-# Objective:
+### Objective:
 
 - For HE rotation, there are two main stages: NTT and automorphism, these two algorithms take up the most proportion of the computations 
 - In this project, I tried to parallelize these two algorithm, and get their performance(latency and resources). Based on the results, it can project the main performance of the HE rotation.
 - After the optimization of these two algorithms, I will increase the performance of the HE rotation
 
 
-# Challenges:
+### Challenges:
 - The parallelization for these two algorithm is not straightforward
 - First, the automorphism algorithm is a rearrangement for the ciphertext which need complex data communication between computation stages. 
 - Second, the modular multiplication in NTT is usually resource-consuming and slow. The high resource requirements of modular arithmetic are needed for designing the low latency NTT cores. 
 - There are others work which related to these two algorithms, but they use the Verilog to accelerate it and not the Xilinx HLS.
 
-# Project Parallelization Hypothesis:
+### Project Parallelization Hypothesis:
 
 - For the Automorphism algorithm I assume that using loop unroll can reduce the computation time and using on-chip SRAM can reduce the off-chip memory access
 
 - For NTT part, I assume that implementing and parallelizing the butterfly unit to increases the parallelism and the performance of the operation.
 
-# Key idea
+### Key idea
 
 - Automorphism
 
@@ -48,7 +48,7 @@
 
 
 
-# Butterfly Unit
+### Butterfly Unit
 The proposed design uses the Iterative NTT scheme of which consists of log2 n stages and performs(n/2) butterfly operations at each stage. Here is an example of the memory read access pattern of coefficients for n=8
 Each yellow dot represents a butterfly operation, which consumes and produces two coefficients mapping to the same degree.
 
@@ -59,14 +59,14 @@ Each yellow dot represents a butterfly operation, which consumes and produces tw
 
 
 
-# Experimental Setup
+### Experimental Setup
 Programming language: C/C++
 
 Target architecture: FPGA
 
 Programming model: Xilinx Vitis HLS
 
-# Explanation of Parameters
+### Explanation of Parameters
 - Automorphism
    - Size of the input array N
    - Number of the unroll factor f
@@ -76,7 +76,7 @@ Programming model: Xilinx Vitis HLS
   - the prime number and the nth root unity
   - Number of butterfly operations in parallel (B <= N / 2)
 
-# Analysis
+### Analysis
 
  For the Automorphism, I expected the latency will be the size of input vector divided by the unroll factor plus some setup operations (in cycles).
  For the NTT part, I expected the latency will be logn
