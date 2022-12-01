@@ -71,15 +71,15 @@ Programming model: Xilinx Vitis HLS
    - Size of the input array N
    - Number of the unroll factor f
 
-NTT
-Size of the array (N)
-the prime number and the nth root unity
-Number of butterfly operations in parallel (B <= N / 2)
+- NTT
+  - Size of the array (N)
+  - the prime number and the nth root unity
+  - Number of butterfly operations in parallel (B <= N / 2)
 
-Analysis
+# Analysis
 
- For the Automorphism, we expected the latency will be the size of input vector divided by the unroll factor plus some setup operations (in cycles).
- For the NTT part, we expected the latency will be logn
+ For the Automorphism, I expected the latency will be the size of input vector divided by the unroll factor plus some setup operations (in cycles).
+ For the NTT part, I expected the latency will be logn
 
 
 
