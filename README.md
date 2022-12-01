@@ -1,5 +1,5 @@
 # csci653
-##FPGA Acceleration of Homomorphic Rotation
+## FPGA Acceleration of Homomorphic Rotation
 
 1. HE(Homomorphic Encryption) can provide protection to clients when they are sending data to the cloud 
 
