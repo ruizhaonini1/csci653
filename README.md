@@ -8,7 +8,7 @@
 
 ### Objective:
 
-- For HE rotation, there are two main stages: NTT and automorphism, these two algorithms take up the most proportion of the computations 
+- For HE rotation, there are two main stages: NTT(Number Theoretic Transform) and automorphism, these two algorithms take up the most proportion of the computations 
 - In this project, I tried to parallelize these two algorithm, and get their performance(latency and resources). Based on the results, it can project the main performance of the HE rotation.
 - After the optimization of these two algorithms, I will increase the performance of the HE rotation
 
